@@ -1,9 +1,12 @@
 body {
-	background-color: #B2E9FD;
+	background: linear-gradient(#b8b3be, #bfd0e0);
+	background-repeat: no-repeat;
+	min-height:100vh;
 }
 
 .header h2 {
-	color: #DC4247;
+	color: #495867;
+	font-family: fantasy, sans-serif;
 }
 
 .header p {
