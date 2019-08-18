@@ -20,7 +20,7 @@ function renderMovies(movieArray) {
 // }
 
 function clickMoviesContainer (evt) {
-  // only do something when they click on a .add-movie-btn
+  // only do something when they click on a .add-movie-btn class
   const targetEl = evt.target
   if (!targetEl.classList.contains('add-movie-btn')) return
 
