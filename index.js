@@ -27,8 +27,22 @@ function clickMoviesContainer (evt) {
   // make sure the btn has a data-movieid attribute
   const movieId = targetEl.dataset.movieid
   if (typeof movieId !== 'string') return
+  var movie = movieData.find(function(currentMovie){
+    return currentMovie.imdbID == movieId
+  })
+  var watchlistJSON = localStorage.getItem('watchlist')
+  var watchlist = JSON.parse(watchlistJSON)
+  
+  if (watchlist === null) {
+    watchlist = []
+  } 
+  watchlist.push(movie)
+  // console.log(watchlist)
+  watchlistJSON = JSON.stringify(watchlist)
+  localStorage.setItem('watchlist', watchlistJSON)
 
-  console.log('you clicked on movie id: ', movieId)
+  
+  // console.log('you clicked on movie id: ', movieId)
 
 }
 
