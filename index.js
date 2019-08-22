@@ -1,4 +1,4 @@
-
+var movies = null;
 // console.log(movieData)
 function renderMovies(movieArray) {
   let movieHTML = movieArray.map(function(currentMovie){
@@ -15,21 +15,19 @@ function renderMovies(movieArray) {
   return movieHTML.join("")
 }
 
-// function saveToWatchlist(imdbID){
-//   console.log("save to watchlist clicked!", imdbID)
-// }
-
 function clickMoviesContainer (evt) {
   // only do something when they click on a .add-movie-btn class
   const targetEl = evt.target
   if (!targetEl.classList.contains('add-movie-btn')) return
-
+  
   // make sure the btn has a data-movieid attribute
   const movieId = targetEl.dataset.movieid
+  
   if (typeof movieId !== 'string') return
-  var movie = movieData.find(function(currentMovie){
+  var movie = movies.find(function(currentMovie){
     return currentMovie.imdbID == movieId
   })
+  
   var watchlistJSON = localStorage.getItem('watchlist')
   var watchlist = JSON.parse(watchlistJSON)
   
@@ -41,16 +39,20 @@ function clickMoviesContainer (evt) {
   watchlistJSON = JSON.stringify(watchlist)
   localStorage.setItem('watchlist', watchlistJSON)
 
-  
-  // console.log('you clicked on movie id: ', movieId)
-
 }
 
 function addEvents() {
   byId('search-form').addEventListener('submit', function(e){
     e.preventDefault();
-    var movieContainer = document.getElementById('movies-container')
-    movieContainer.innerHTML = renderMovies(movieData)
+    var searchString = document.getElementById('search-bar').value
+    var urlEncodedSearchString = encodeURIComponent(searchString)
+    axios.get("http://www.omdbapi.com/?apikey=3430a78&s=" + urlEncodedSearchString).then(function(response){
+      console.log(response.data)
+      var movieContainer = document.getElementById('movies-container')
+      movies = response.data.Search;
+      movieContainer.innerHTML = renderMovies(movies)
+    })
+
   })
   byId('movies-container').addEventListener('click', clickMoviesContainer)
 }

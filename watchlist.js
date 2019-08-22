@@ -1,5 +1,9 @@
+document.addEventListener('DOMContentLoaded', populateMovies)
 
-localStorage.getItem('watchlist')
+ var watchListJSON = localStorage.getItem('watchlist');
+ var watchList = JSON.parse(watchListJSON);
+
+ console.log(watchList)
 
 function renderMovies(movieArray) {
   let movieHTML = movieArray.map(function(currentMovie){
@@ -18,5 +22,7 @@ function renderMovies(movieArray) {
 
 function populateMovies(){
   var movieContainer = document.getElementById('movies-container')
-    movieContainer.innerHTML = renderMovies(movieData)
+  movieContainer.innerHTML = renderMovies(watchList)
 }
+
+
