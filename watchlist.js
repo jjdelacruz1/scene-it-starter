@@ -13,7 +13,7 @@ function renderMovies(movieArray) {
                 <div class="card-body">
                   <h5 class="card-title">${currentMovie.Title}</h5>
                   <p class="card-text">${currentMovie.Year}</p>
-                  <button type="button" id="addBtn" data-movieid="${currentMovie.imdbID}" class="btn btn-primary btn-block add-movie-btn">Add</a>
+                  <button type="button" id="addBtn" data-movieid="${currentMovie.imdbID}" class="btn btn-primary btn-block add-movie-btn">Remove from List</a>
                 </div>
               </div>`
   })

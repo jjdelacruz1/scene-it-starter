@@ -15,17 +15,25 @@ function renderMovies(movieArray) {
   return movieHTML.join("")
 }
 
+// var watchlist = [];
+
 function clickMoviesContainer (evt) {
   // only do something when they click on a .add-movie-btn class
   const targetEl = evt.target
-  if (!targetEl.classList.contains('add-movie-btn')) return
-  
+  // console.log(targetEl)
+  const wasAddMovieBtnClicked = targetEl.classList.contains('add-movie-btn')
+  if (!wasAddMovieBtnClicked) return
+
   // make sure the btn has a data-movieid attribute
   const movieId = targetEl.dataset.movieid
   
   if (typeof movieId !== 'string') return
   var movie = movies.find(function(currentMovie){
-    return currentMovie.imdbID == movieId
+      if (currentMovie.imdbID == movieId) {
+        return true;
+      }  else {
+        return false;
+      }
   })
   
   var watchlistJSON = localStorage.getItem('watchlist')
